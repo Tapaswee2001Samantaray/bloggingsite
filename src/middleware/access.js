@@ -51,7 +51,7 @@ const authorQueryAuthorisation = async function (req, res, next) {
             //=======performing authorization==========
             const blogData = await blogModel.find(authorQuery);
             const validAuthor = blogData.filter(ele => ele.authorId.toString() == authorVerified);
-            if (!validAuthor) {
+            if (validAuthor.length == 0) {
                 return res.status(403).send({ status: false, msg: "Author is not authorised" });
             }
 
